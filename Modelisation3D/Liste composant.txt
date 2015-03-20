@@ -1,0 +1,15 @@
+MPU6050 accéléromètre et giroscope : -- Tuto : http://tiptopboards.free.fr/arduino_forum/viewtopic.php?f=2&t=28
+				     -- Ebay : http://www.ebay.fr/itm/IMU-6DOF-MPU-6050-Invensense-breakout-board-/281448300799?pt=FR_YO_MaisonJardin_Bricolage_ElectroniqueComposants&hash=item4187a040ff										
+
+
+NRF24L01 Sans fil Emetteur Récepteur 2.4GHz : -- Tuto : http://playground.arduino.cc/InterfacingWithHardware/Nrf24L01
+					      -- Ebay : http://www.ebay.fr/itm/NRF24L01-Sans-fil-Emetteur-Recepteur-Module-SMA-pour-Antenna-Arduino-2-4G-NEUF-/141035832475?pt=FR_Informatique_Reseaux_Autres&hash=item20d664049b
+
+
+
+
+Recepteur/Emztteur Vidéo 5.8 GHz : -- Ebay : http://www.ebay.fr/itm/Boscam-FPV-AV-TX-RX-2KM-5-8G-8CH-RC805-Receiver-200mW-TS351-Transmetteur-CN145-/251706825370?pt=FR_YO_Jeux_RadioComRobots_VehiculesRadiocommandes&hash=item3a9ae55a9a
+
+
+Moteur 110 tr/min 5.39Nm : -- Conrad : http://www.ebay.fr/itm/Boscam-FPV-AV-TX-RX-2KM-5-8G-8CH-RC805-Receiver-200mW-TS351-Transmetteur-CN145-/251706825370?pt=FR_YO_Jeux_RadioComRobots_VehiculesRadiocommandes&hash=item3a9ae55a9a
+
