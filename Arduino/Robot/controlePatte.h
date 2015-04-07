@@ -2,11 +2,13 @@
 #define H_PATTE
 
 #include "Arduino.h"
+#include "settings.h"
 
 /////PHASES/////
 
 #define STOP 0
-#define MARCHE 1
+#define MARCHE_AV 1
+#define MARCHE_AR 1
 
 ////////////////
 
@@ -36,6 +38,7 @@ private:
 	uint8_t pin_out2;
 
 	uint8_t phase;
-	uint8_t vitesse;
+	uint8_t vitesse_h;
+	uint8_t vitesse_s;
 };
 #endif
