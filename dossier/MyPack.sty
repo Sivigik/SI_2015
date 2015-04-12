@@ -1,0 +1,58 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{MyPack}
+
+\RequirePackage{amsfonts}
+\RequirePackage{titlesec}
+\RequirePackage{amssymb, amsmath, mathtools} 
+\RequirePackage{fontspec}
+\RequirePackage{xunicode}
+\RequirePackage[a4paper]{geometry}
+\RequirePackage{babel}
+\RequirePackage{color}
+\RequirePackage{fancyhdr}
+\RequirePackage{ifthen}
+\RequirePackage[font=small,format=plain,labelfont=bf,up,
+    textfont=normal,up,
+    justification=justified,
+    singlelinecheck=false]{caption}
+\RequirePackage[tight]{shorttoc}
+\RequirePackage{multicol}
+\RequirePackage{lettrine}
+\RequirePackage{listings}
+\RequirePackage{framed}
+
+\definecolor{blue}{RGB}{46,106,177}
+\definecolor{grey}{RGB}{200,200,200}
+\definecolor{grey2}{RGB}{250,250,250}
+
+\newcommand{\initPage}[1][ ]{
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{#1}
+\rhead{\today}
+\rfoot{}
+\lfoot{}
+\lstset{basicstyle=\ttfamily\footnotesize,
+  keywordstyle= \bf \color{blue},
+  commentstyle= \color[gray]{0.5},
+  stringstyle= \color{red},
+  numbers=left,
+  numberstyle=\scriptsize \color{blue},
+  breaklines=true,
+  breakatwhitespace=true,
+  language= C}
+  \titleformat*{\section}{\normalfont\Large\bfseries\color{blue} }
+\titlespacing*{\section}{0pt}{1em}{-0.1em}
+\titlespacing*{\subsection}{5pt}{1em}{-0.1em}
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\newcommand{\sommaire}{\shorttoc{Sommaire}{1}}
+}
+\newcommand{\initial}[1]{
+\lettrine[lines=3, lhang=0.3, nindent=0em]{\color{blue}{\textsf{#1}{}}}}
+
+\newcommand{\resume}[1]{
+\begin{center}
+\colorbox{blue}{\begin{minipage}[]{.20\linewidth}\includegraphics[height=2cm]{warning.png}\end{minipage}}\colorbox{grey}{\hspace{2mm}\begin{minipage}[]{.70\linewidth}
+\begin{multicols}{2}#1\end{multicols}
+\end{minipage}\hspace*{2mm}}\end{center}}

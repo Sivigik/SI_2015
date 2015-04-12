@@ -89,9 +89,11 @@ void ControlePatte::marcheMode()
 			analogWrite(this->pin_out2, this->vitesse_h);
 		}
 	}
-
 }
 bool ControlePatte::finPhase()
 {
 	if(this->phase == PRET_HAUT)
+	{
+		analogWrite(this->)
+	}
 }
