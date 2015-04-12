@@ -91,3 +91,7 @@ void ControlePatte::marcheMode()
 	}
 
 }
+bool ControlePatte::finPhase()
+{
+	if(this->phase == PRET_HAUT)
+}

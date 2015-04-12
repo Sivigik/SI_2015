@@ -1,6 +1,6 @@
-#include <VirtualWire.h>
+#include "VirtualWire.h"
 
-#define DEBUG
+//#define DEBUG
 
 #ifdef DEBUG
 #define dinfo(msg) Serial.println(msg)
@@ -20,10 +20,10 @@
 
 uint8_t toSend[] = {0, 0};
 
-const uint8_t bp_avance = 2;
-const uint8_t bp_recule = 3;
+const uint8_t bp_avance = 6;
+const uint8_t bp_recule = 5;
 const uint8_t bp_gauche = 4;
-const uint8_t bp_droite = 5;
+const uint8_t bp_droite = 3;
 const uint8_t potar = 0;
 
 void readValues();
@@ -39,6 +39,11 @@ void setup()
     pinMode(bp_recule, OUTPUT);
     pinMode(bp_gauche, OUTPUT);
     pinMode(bp_droite, OUTPUT);
+    
+    digitalWrite(bp_avance, HIGH);
+    digitalWrite(bp_recule, HIGH);
+    digitalWrite(bp_gauche, HIGH);
+    digitalWrite(bp_droite, HIGH);
  
     vw_setup(2000);
 }
@@ -49,6 +54,9 @@ void loop()
 
     readValues();
 
+    dvar(toSend[VITESSE]);
+    dvar(toSend[DIR]);
+
     dinfo("TRANSMISSION");
 
 
@@ -57,12 +65,22 @@ void loop()
 
     dinfo("FIN");
 
+#ifdef DEBUG
+    delay(1500);
+#else
     delay(500);
+#endif
 }
 
 void readValues()
 {
-    toSend[VITESSE] = analogRead(potar);
+    dvar(analogRead(potar));
+    toSend[VITESSE] = map(analogRead(potar), 0, 1024, 0, 255);
+    
+    dvar(digitalRead(bp_recule));
+    dvar(digitalRead(bp_avance));
+    dvar(digitalRead(bp_gauche));
+    dvar(digitalRead(bp_droite));
 
     if (!digitalRead(bp_recule))
     {
