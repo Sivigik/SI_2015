@@ -43,8 +43,10 @@ public:
 	void changePhase(uint8_t phase);
 	void stopMode();
 	void marcheMode();
+	void pretMode();
 	bool isZero();
-	bool finPhase();
+
+	void reverse();
 private:
 	uint8_t pin_out1;
 	uint8_t pin_in1;
@@ -54,5 +56,7 @@ private:
 	uint8_t phase;
 	uint8_t vitesse_h;
 	uint8_t vitesse_s;
+
+	bool reversed;
 };
 #endif

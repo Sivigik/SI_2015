@@ -68,7 +68,7 @@ void loop()
 #ifdef DEBUG
     delay(1500);
 #else
-    delay(500);
+    delay(100);
 #endif
 }
 
