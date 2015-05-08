@@ -1,12 +1,27 @@
 #ifndef H_PATTE
 #define H_PATTE
 
+//#define DEBUG
+
+#ifdef DEBUG
+#define dinfo(msg) Serial.println(msg)
+#define dvar(var) Serial.print(#var);Serial.print(":");Serial.println(var)
+#else
+#define dinfo(msg)
+#define dvar(var)
+#endif
+
 #include "Arduino.h"
+#include "settings.h"
 
 /////PHASES/////
 
 #define STOP 0
-#define MARCHE 1
+#define MARCHE_AV 1
+#define MARCHE_AR 2
+
+#define PRET_HAUT 3
+#define PRET_BAS 4
 
 ////////////////
 
@@ -28,7 +43,10 @@ public:
 	void changePhase(uint8_t phase);
 	void stopMode();
 	void marcheMode();
+	void pretMode();
 	bool isZero();
+
+	void reverse();
 private:
 	uint8_t pin_out1;
 	uint8_t pin_in1;
@@ -36,6 +54,9 @@ private:
 	uint8_t pin_out2;
 
 	uint8_t phase;
-	uint8_t vitesse;
+	uint8_t vitesse_h;
+	uint8_t vitesse_s;
+
+	bool reversed;
 };
 #endif
