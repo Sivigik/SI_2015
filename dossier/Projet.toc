@@ -1,0 +1,11 @@
+\select@language {french}
+\contentsline {part}{I\hspace {1em}Présentation du projet}{3}
+\contentsline {section}{\numberline {A}Cahier des charges}{4}
+\contentsline {section}{\numberline {B}Analyse fonctionnelle}{4}
+\contentsline {part}{II\hspace {1em}Etude et réalisation des pattes}{5}
+\contentsline {section}{\numberline {C}Géométrie des pattes}{5}
+\contentsline {section}{\numberline {D}Réalisation des pattes}{5}
+\contentsline {part}{III\hspace {1em}Mesure de la position d'une patte}{5}
+\contentsline {part}{IV\hspace {1em}Conception de la radiocommande}{6}
+\contentsline {part}{V\hspace {1em}Programmation du robot}{6}
+\contentsline {part}{VI\hspace {1em}Conclusion}{6}

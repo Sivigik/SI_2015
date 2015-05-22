@@ -25,13 +25,20 @@
 \definecolor{grey}{RGB}{200,200,200}
 \definecolor{grey2}{RGB}{250,250,250}
 
-\newcommand{\initPage}[1][ ]{
+\definecolor{green1}{RGB}{102,204,0}
+\definecolor{green2}{RGB}{174,207,0}
+\definecolor{green3}{RGB}{0,120,38}
+
+\newcommand{\initPage}[2]{
 \pagestyle{fancy}
 \fancyhead{}
-\lhead{#1}
-\rhead{\today}
+\lhead{\includegraphics[width=2cm]{images/logorhex.png}}
+\chead{#1}
+\rhead{#2}
 \rfoot{}
 \lfoot{}
+\renewcommand{\headrulewidth}{0.1pt}
+
 \lstset{basicstyle=\ttfamily\footnotesize,
   keywordstyle= \bf \color{blue},
   commentstyle= \color[gray]{0.5},
@@ -41,12 +48,14 @@
   breaklines=true,
   breakatwhitespace=true,
   language= C}
-  \titleformat*{\section}{\normalfont\Large\bfseries\color{blue} }
+  \titleformat*{\section}{\normalfont\Large\bfseries\color{green1} }
 \titlespacing*{\section}{0pt}{1em}{-0.1em}
 \titlespacing*{\subsection}{5pt}{1em}{-0.1em}
-\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesection}{\Alph{section}}
 \renewcommand{\thesubsection}{\arabic{subsection}}
-\newcommand{\sommaire}{\shorttoc{Sommaire}{1}}
+% \renewcommand{\thepart}{\Alph{part}}
+
+% \newcommand{\sommaire}{\tableofcontents{Sommaire}{1}}
 }
 \newcommand{\initial}[1]{
 \lettrine[lines=3, lhang=0.3, nindent=0em]{\color{blue}{\textsf{#1}{}}}}

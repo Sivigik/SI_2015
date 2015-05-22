@@ -58,6 +58,8 @@ void loop()
     dvar(toSend[DIR]);
 
     dinfo("TRANSMISSION");
+    dvar(toSend[VITESSE]);
+    dvar(toSend[DIR]);
 
 
     vw_send(toSend, 2);
@@ -84,15 +86,16 @@ void readValues()
 
     if (!digitalRead(bp_recule))
     {
-        if(!toSend[DIR]&(1<<AVANT))
+        if(!(toSend[DIR]&(1<<AVANT)))
             toSend[DIR] |= (1<<ARRIERE);
         
         toSend[DIR] &= ~(1<<AVANT);
+        dvar(toSend[DIR]);
     }
 
     if (!digitalRead(bp_avance))
     {
-        if(!toSend[DIR]&(1<<ARRIERE))
+        if(!(toSend[DIR]&(1<<ARRIERE)))
             toSend[DIR] |= (1<<AVANT);
         
         toSend[DIR] &= ~(1<<ARRIERE);
@@ -104,10 +107,16 @@ void readValues()
         toSend[DIR] &= ~(1<<DROITE);
     }
 
-    if (!digitalRead(bp_droite))
+    else if (!digitalRead(bp_droite))
     {
         toSend[DIR] |= (1<<DROITE);
         toSend[DIR] &= ~(1<<GAUCHE);
+    }
+    
+    else
+    {
+      toSend[DIR] &= ~(1<<GAUCHE);
+      toSend[DIR] &= ~(1<<DROITE);
     }
 
 }

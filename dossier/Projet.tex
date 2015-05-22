@@ -1,4 +1,5 @@
 \documentclass[12pt,french,a4paper]{article}
+\usepackage[final]{pdfpages}
 \usepackage{MyPack}
 
 \usepackage[usenames,dvipsnames]{pstricks}
@@ -6,8 +7,83 @@
 % \usepackage{pst-grad} % For gradients
 % \usepackage{pst-plot} % For axes
 
-\initPage[Projet Interdisiplinaire]
+% Image sur toute la largeure
+% \includegraphics[width=\textwidth,trim=0 0 0 650,clip=true]{Tafoni_by_Endico.jpg}
+
 
 \begin{document}
-\input{video.tex}
+
+\initPage{Projet}{Hugo LEVY-FALK}
+
+\includepdf[pages=-]{titre.pdf}
+
+\newpage
+\tableofcontents
+\newpage
+
+\part{Présentation du projet}
+
+L'utilisation de drones en tout genres est de plus en plus courrante. Ces engins permettent notament à un opérateur de surveiller à distance une zone dangereuse. Il existe actuellement de nombreux drones terrestres, la plupart à vocation militaire. On peut distinguer ceux créés par la société \emph{Boston Dynamics} et notament le robot RHex à cause de l'originalité de sa morphologie et de sa polyvalence. Cependant le robot de \emph{Boston Dynamics} et destiné à un usage militaire. Nous avons donc décidé de réaliser un robot dédié au secours au personnes, permettant à un opérateur de déplacer une caméra dans un environnement hostile, par exemple suite à une catastrophe naturelle, afin de repérer les victimes.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth/2]{images/beteCorne.png}
+	\caption[bete a corne]{\label{fig:Bete_corne} Résumé de l'analyse du besoin}
+\end{figure}
+
+\section{Cahier des charges}
+
+Le cahier des charges du robot est donc simple. Il faut que le robot puisse se déplacer facilement sur un terrain pouvant être accidenté et soit capable de renvoyer la vidéo à l'opérateur.
+
+Nous avons établis le cahier des charges suivant : 
+\begin{description}
+\item[Vitesse de dépalcement :]{environ $ 5 km.h^-1$ }
+\item[Masse totale :]{environ $ 2.5 kg$}
+\item[Rayon d'action :]{environ $ 20 m$}
+\end{description}
+
+Ce cahier des charges correspond à celui d'un prototype; un robot apte à opérer en situation réelle nécessite un rayon d'action plus important.
+
+\section{Analyse fonctionnelle}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{images/SchemaFonctionnel.png}
+	\label{fig:Schema_fonctionnel}
+	\caption[schema fonctionnel]{ Schema fonctionnel}
+\end{figure}
+
+Afin de coordonner le travail en équipe, nous avons réalisé une étude fonctionnelle et distribué les tâches. Je me suis occupé de l'étude et la réalisation des pattes ainsi que du pilotage du robot.
+
+\part{Etude et réalisation des pattes}
+
+\section{Géométrie des pattes}
+Nous nous sommes inspirés des pattes du robot de \emph{Boston Dynamics}. Ces pattes présentent l'intérêt d'autoriser le roulage grâce à leur partie circulaire, tout en permettant de surmonter un obstacle à la manière d'une patte plus classique.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth/2]{images/patteSchema.png}
+	\caption[geometrie]{\label{fig:geometrie_patte} Géométrie d'une patte}
+\end{figure}
+
+\section{Réalisation des pattes}
+
+Les pattes sont réalisées en PVC de 4mm et mises en forme par thermoformage. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth/2]{images/patteSchema.png}
+	\caption[Moule_1]{\label{fig:geometrie_patte} Géométrie d'une patte}
+\end{figure}
+
+Nous avons réalisé plusieurs prototypes de pattes afin de valider la forme de ces dernières. 
+
+\part{Mesure de la position d'une patte}
+
+\part{Conception de la radiocommande}
+
+\part{Programmation du robot}
+
+\part{Conclusion}
+
 \end{document}

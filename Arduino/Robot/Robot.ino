@@ -3,37 +3,37 @@
 
 /*DEFINITION DES PINS
 */
-const uint8_t moteur1_IN1 = 4;
-const uint8_t moteur1_IN2 = 6;
-const uint8_t moteur1_OUT1 = 3;
-const uint8_t moteur1_OUT2 = 5;
+const uint8_t moteur1_IN1 = 50;
+const uint8_t moteur1_IN2 = 50;
+const uint8_t moteur1_OUT1 = 6;
+const uint8_t moteur1_OUT2 = 7;
 
-const uint8_t moteur2_IN1 = 10;
-const uint8_t moteur2_IN2 = 24;
-const uint8_t moteur2_OUT1 = 3;
-const uint8_t moteur2_OUT2 = 30;
+const uint8_t moteur2_IN1 = 50;
+const uint8_t moteur2_IN2 = 50;
+const uint8_t moteur2_OUT1 = 4;
+const uint8_t moteur2_OUT2 = 5;
 
-const uint8_t moteur3_IN1 = 11;
-const uint8_t moteur3_IN2 = 25;
-const uint8_t moteur3_OUT1 = 5;
-const uint8_t moteur3_OUT2 = 31;
+const uint8_t moteur3_IN1 = 50;
+const uint8_t moteur3_IN2 = 50;
+const uint8_t moteur3_OUT1 = 2;
+const uint8_t moteur3_OUT2 = 3;
 
-const uint8_t moteur4_IN1 = 12;
-const uint8_t moteur4_IN2 = 26;
-const uint8_t moteur4_OUT1 = 6;
-const uint8_t moteur4_OUT2 = 32;
+const uint8_t moteur4_IN1 = 50;
+const uint8_t moteur4_IN2 = 50;
+const uint8_t moteur4_OUT1 = 8;
+const uint8_t moteur4_OUT2 = 9;
 
-const uint8_t moteur5_IN1 = 13;
-const uint8_t moteur5_IN2 = 27;
-const uint8_t moteur5_OUT1 = 7;
-const uint8_t moteur5_OUT2 = 34;
+const uint8_t moteur5_IN1 = 50;
+const uint8_t moteur5_IN2 = 50;
+const uint8_t moteur5_OUT1 = 10;
+const uint8_t moteur5_OUT2 = 11;
 
-const uint8_t moteur6_IN1 = 22;
-const uint8_t moteur6_IN2 = 28;
-const uint8_t moteur6_OUT1 = 8;
-const uint8_t moteur6_OUT2 = 35;
+const uint8_t moteur6_IN1 = 34;
+const uint8_t moteur6_IN2 = 35;
+const uint8_t moteur6_OUT1 = 12;
+const uint8_t moteur6_OUT2 = 13;
 
-const uint8_t pin_Rx = 36;
+const uint8_t pin_Rx = 52;
 
 
 ControlePatte patte1(moteur1_IN1, moteur1_IN2, moteur1_OUT1, moteur1_OUT2);
@@ -87,12 +87,22 @@ void setup()
 #endif
     dinfo("Déboguage.");
 
-    initPattes();
+    //initPattes();
 
-    // réception radio
+    //réception radio
     vw_setup(2000); 
     vw_set_rx_pin(pin_Rx);
     vw_rx_start();
+
+    patte1.changePhase(STOP);
+	patte2.changePhase(STOP);
+	patte3.changePhase(STOP);
+	patte4.changePhase(STOP);
+	patte5.changePhase(STOP);
+	patte6.changePhase(STOP);
+	while(!patte6.isZero())
+		patte3.regulation();
+	patte3.changePhase(MARCHE_AV);
 
 }
 
@@ -100,37 +110,50 @@ void loop()
 {
 	uint8_t buf[2]; 
     uint8_t buflen = 2;
-	if (vw_wait_rx_max(10)) // attente de reception d'ordre pendant 10ms
+    uint8_t b = vw_wait_rx_max(50);
+    dvar(b);
+	if (b) // attente de reception d'ordre pendant 10ms
 	{
-		if (vw_get_message(buf, &buflen)) // copie le message et vérifie qu'il n'est pas corrompu
+          
+                bool a = vw_get_message(buf, &buflen);
+                dvar(a);
+		if (a) // copie le message et vérifie qu'il n'est pas corrompu
 		{
 			ordre_dir = buf[0];
 			ordre_vit = buf[1];
 			interpreteOrdre();
 		}
 	}
+  dvar(ordre_dir);
+    dvar(ordre_vit);
+        delay(3000);
 
-	patte1.regulation();
+	//patte1.regulation();
+	//patte2.regulation();
+	//patte3.regulation();
+	//patte4.regulation();
+	//patte5.regulation();
+	patte3.regulation();
 }
 
 void initPattes()
 {
 	dinfo("Initialisation des pattes.");
 
-	patte1.changePhase(STOP);
+/*	patte1.changePhase(STOP);
 	patte2.changePhase(STOP);
 	patte3.changePhase(STOP);
 	patte4.changePhase(STOP);
 	patte5.changePhase(STOP);
 	patte6.changePhase(STOP);
-
+*/
 	dinfo("Inversion du sens de rotation des pattes de gauche.");
-	for(int i=0; i<3; i++)
-		gauche[i]->reverse();
+	//for(int i=0; i<3; i++)
+	//	gauche[i]->reverse();
 
 	dinfo("Positionnement des pattes.");
 
-	uint8_t zero = 0;
+/*	uint8_t zero = 0;
 
 	while(zero != 7)
 	{
@@ -152,16 +175,17 @@ void initPattes()
 		patte6.regulation();
 		if(patte6.isZero())
 			zero |= 1 << 5;
-	}
+	}*/
 	dinfo("Les pattes sont au repos.");
 }
 void prepareMarche()
 {
-	int i;
+	dinfo("Preparation a la marche.");
+	/*int i;
 	for(i=0;i<3;i++)
 		impaire[i]->changePhase(PRET_HAUT);
 	for(i=0;i<3;i++)
-		paire[i]->changePhase(PRET_BAS);
+		paire[i]->changePhase(PRET_BAS);*/
 }
 
 void interpreteOrdre()
@@ -180,41 +204,47 @@ void interpreteOrdre()
 }
 
 void setVitesse() {
-	patte1.changeVitesse(ordre_vit);
-	patte2.changeVitesse(ordre_vit);
-	patte3.changeVitesse(ordre_vit);
-	patte4.changeVitesse(ordre_vit);
-	patte5.changeVitesse(ordre_vit);
-	patte6.changeVitesse(ordre_vit);
-}
+	dinfo("Mis a jour vitesse.");
+/*	patte1.changeVitesse(ordre_vit);
+*//*	patte2.changeVitesse(ordre_vit);
+*//*	patte3.changeVitesse(ordre_vit);
+*//*	patte4.changeVitesse(ordre_vit);
+*//*	patte5.changeVitesse(ordre_vit);
+*//*	patte6.changeVitesse(ordre_vit);
+*/}
 void avance() {
-	patte1.changePhase(MARCHE_AV);
-	patte2.changePhase(MARCHE_AV);
-	patte3.changePhase(MARCHE_AV);
-	patte4.changePhase(MARCHE_AV);
-	patte5.changePhase(MARCHE_AV);
-	patte6.changePhase(MARCHE_AV);
-}
+	dinfo("AVANCE.");
+/*	patte1.changePhase(MARCHE_AV);
+*//*	patte2.changePhase(MARCHE_AV);
+*//*	patte3.changePhase(MARCHE_AV);
+*//*	patte4.changePhase(MARCHE_AV);
+*//*	patte5.changePhase(MARCHE_AV);
+*//*	patte6.changePhase(MARCHE_AV);
+*/}
 void arrete() {
-	patte1.changePhase(STOP);
-	patte2.changePhase(STOP);
-	patte3.changePhase(STOP);
-	patte4.changePhase(STOP);
-	patte5.changePhase(STOP);
-	patte6.changePhase(STOP);
-}
+	dinfo("ARRETE.");
+/*	patte1.changePhase(STOP);
+*//*	patte2.changePhase(STOP);
+*//*	patte3.changePhase(STOP);
+*//*	patte4.changePhase(STOP);
+*//*	patte5.changePhase(STOP);
+*//*	patte6.changePhase(STOP);
+*/}
 void recule() {
-	patte1.changePhase(MARCHE_AR);
-	patte2.changePhase(MARCHE_AR);
-	patte3.changePhase(MARCHE_AR);
-	patte4.changePhase(MARCHE_AR);
-	patte5.changePhase(MARCHE_AR);
-	patte6.changePhase(MARCHE_AR);
-}
+	dinfo("RECULE.");
+/*	patte1.changePhase(MARCHE_AR);
+*//*	patte2.changePhase(MARCHE_AR);
+*//*	patte3.changePhase(MARCHE_AR);
+*//*	patte4.changePhase(MARCHE_AR);
+*//*	patte5.changePhase(MARCHE_AR);
+*//*	patte6.changePhase(MARCHE_AR);
+*/}
 
 void va_gauche() {
+	dinfo("GAUCHE.");
 	// à faire
 }
 void va_droite() {
+	dinfo("DROITEE.");
 	// à faire
 }
